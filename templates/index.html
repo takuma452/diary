@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>トップページ</title>
+</head>
+<body>
+  <h1>シンプル日記サイトへようこそ！</h1>
+  <ul>
+    <li><a href="{{ url_for('read_diary') }}">日記を読む</a></li>
+    <li><a href="{{ url_for('write_diary') }}">日記を書く</a></li>
+  </ul>
+</body>
+</html>

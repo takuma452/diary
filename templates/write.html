@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>日記を書く</title>
+</head>
+<body>
+  <h1>日記を書く</h1>
+  <form method="POST">
+    <label>タイトル: <input type="text" name="title"></label><br>
+    <label>内容:<br><textarea name="content" rows="5" cols="40"></textarea></label><br>
+    <button type="submit">保存</button>
+  </form>
+  <a href="{{ url_for('index') }}">トップへ戻る</a>
+</body>
+</html>
