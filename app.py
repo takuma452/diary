@@ -1,6 +1,10 @@
 from flask import Flask, render_template, redirect, url_for, request
-from flask_sqlalchemy import SQLAlchemy
-app = Flask(__name__)
+from model import db, Diary
+app = Flask(
+    __name__,
+    template_folder='view/templates',
+    static_folder='view/static'
+)
 
 #=======================================================#Flaskの設定
 #=======================================================
@@ -12,25 +16,7 @@ database = 'sqlite:///' + os.path.join(base_dir, 'data.sqlite')
 app.config['SQLALCHEMY_DATABASE_URI'] = database
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-
-#=======================================================#データベース関連
-#=======================================================
-db = SQLAlchemy(app)
-class Diary(db.Model):
-    #テーブル名
-    __tablename__='diaries'
-    
-    #日記ID
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    #タイトル
-    title = db.Column(db.String(30), nullable=False)
-    #内容
-    content = db.Column(db.String(500), nullable=False)
-    
-    #表示用
-    def __str__(self):
-        return f'日記ID:{self.id} タイトル:{self.title} 内容:{self.content}'
-    
+db.init_app(app)
 #=======================================================#ルーティング
 #=======================================================
 
@@ -38,7 +24,6 @@ class Diary(db.Model):
 @app.route('/')
 def index():
     return render_template('index.html')
-
 #日記を書く
 @app.route('/diary/write', methods=['GET', 'POST'])
 def write_diary():
