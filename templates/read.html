@@ -6,10 +6,21 @@
 </head>
 <body>
   <h1>日記を読む</h1>
-  <p>ここに登録済みの日記を一覧表示する予定です。</p>
+  <h2>日記一覧</h2>
+  <ul>
+  {% for diary in diary_list %}
+      <p>{{ diary.title }}</p>
+      <p>{{ diary.content }}
 
-  <a href="{{ url_for('update_diary') }}">日記を更新する</a><br>
+      <form method="post" action="{{ url_for('delete_diary', diary_id=diary.id) }}">
+                <button type="submit" class="delete-button">削除</button>
+      </form>
 
+      <form method="get" action="{{ url_for('update_diary', diary_id=diary.id) }}">
+              <button type="submit" class="update-button">更新</button>
+      </form>
+  {% endfor %}
+  </ul>
   <a href="{{ url_for('index') }}">トップへ戻る</a>
 </body>
 </html>

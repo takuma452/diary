@@ -3,6 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <title>トップページ</title>
+
+    <!-- manifestをリンク -->
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+  <meta name="theme-color" content="#2E86C1">
+
+  <!-- Service Worker 登録 -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/static/service-worker.js')
+      .then(reg => {
+        console.log('Service Worker registered.', reg);
+      })
+      .catch(err => console.error('Service Worker failed:', err));
+    }
+  </script>
+
 </head>
 <body>
   <h1>シンプル日記サイトへようこそ！</h1>
